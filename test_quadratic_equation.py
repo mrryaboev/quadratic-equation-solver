@@ -1,52 +1,46 @@
 import pytest
-from quadratic_equation import solve_quadratic_equation
+from your_module_name import solve_quadratic_equation # Замените your_module_name на имя вашего файла
 
-def test_two_real_roots():
-    x1, x2 = solve_quadratic_equation(1, -3, 2)
-    assert x1 == 1.0
-    assert x2 == 2.0
 
-def test_one_real_root():
-    x1, x2 = solve_quadratic_equation(1, -4, 4)
-    assert x1 == 2.0
-    assert x2 == 2.0
+def test_two_distinct_roots():
+    assert solve_quadratic_equation(1, -5, 6) == [2.0, 3.0]
 
-def test_complex_roots():
-    x1, x2 = solve_quadratic_equation(1, 2, 5)
-    assert x1 == (-1+2j)
-    assert x2 == (-1-2j)
+def test_two_equal_roots():
+    assert solve_quadratic_equation(1, -4, 4) == [2.0]
 
-def test_integer_coefficients():
-    x1, x2 = solve_quadratic_equation(2, -4, 2)
-    assert x1 == 1.0
-    assert x2 == 1.0
+def test_two_equal_roots_b_zero():
+    assert solve_quadratic_equation(1, 0, -9) == [-3.0, 3.0]
 
-def test_float_coefficients():
-    x1, x2 = solve_quadratic_equation(0.5, -1.5, 1)
-    assert x1 == 1.0
-    assert x2 == 2.0
+def test_two_equal_roots_a_zero_b_zero():
+    assert solve_quadratic_equation(4, 0, 0) == [0.0]
 
-def test_a_equal_zero_no_solution():
-     assert solve_quadratic_equation(0, 0, 1) == 'Нет решений'
+def test_no_real_roots():
+    result = solve_quadratic_equation(1, 1, 1)
+    assert len(result) == 2
+    assert isinstance(result[0], complex)
+    assert isinstance(result[1], complex)
 
-def test_a_equal_zero_inf_solutions():
-     assert solve_quadratic_equation(0, 0, 0) == 'Бесконечное число решений'
+def test_a_zero_not_quadratic():
+    result = solve_quadratic_equation(0, 5, -2)
+    assert result == [-0.4]
 
-def test_a_equal_zero_linear():
-     x1, x2 = solve_quadratic_equation(0, 2, 2)
-     assert x1 == -1.0
-     assert x2 == -1.0
+def test_a_zero_b_zero_c_not_zero():
+  assert solve_quadratic_equation(0, 0, 2) == []
+
+def test_a_zero_b_zero_c_zero():
+    assert solve_quadratic_equation(0, 0, 0) is None
 
 def test_large_coefficients():
-    x1, x2 = solve_quadratic_equation(1000, -3000, 2000)
-    assert x1 == 1.0
-    assert x2 == 2.0
-    
-def test_small_coefficients():
-    x1, x2 = solve_quadratic_equation(0.001, -0.003, 0.002)
-    assert x1 == 1.0
-    assert x2 == 2.0
+    assert solve_quadratic_equation(1000, -2000, 1000) == [1.0]
 
-def test_invalid_input():
-    with pytest.raises(TypeError):
-        solve_quadratic_equation("a", "b", "c")
+def test_small_coefficients():
+  roots = solve_quadratic_equation(0.001, -0.002, 0.001)
+  assert len(roots) == 1
+  assert abs(roots[0] - 1.0) < 1e-6
+
+
+def test_invalid_input_string():
+    assert solve_quadratic_equation("a", 2, 3) is None
+
+def test_invalid_input_none():
+    assert solve_quadratic_equation(1, None, 3) is None
