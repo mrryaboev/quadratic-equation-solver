@@ -1,5 +1,5 @@
 import pytest
-from your_module_name import solve_quadratic_equation # Замените your_module_name на имя вашего файла
+from quadratic_equation import solve_quadratic_equation # Замените your_module_name на имя вашего файла
 
 
 def test_two_distinct_roots():
