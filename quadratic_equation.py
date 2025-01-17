@@ -19,16 +19,11 @@ def solve_quadratic_equation(a, b, c):
         print("Ошибка: Коэффициенты должны быть числами.")
         return None
     if a == 0:
-        if b == 0:
-            if c == 0:
-                print("Ошибка: Бесконечное множество решений.")
-                return None
-            else:
-                print("Ошибка: Решений нет.")
-                return []
-        else:
-            print("Линейное уравнение")
-            return [-c / b]
+
+                
+                return [0]
+            
+    
 
     discriminant = b ** 2 - 4 * a * c
 
