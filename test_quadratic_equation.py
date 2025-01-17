@@ -1,46 +1,22 @@
-import pytest
-from quadratic_equation import solve_quadratic_equation # Замените your_module_name на имя вашего файла
+import unittest
+from quadratic_solver import solve_quadratic
 
+class TestQuadraticSolver(unittest.TestCase):
+    def test_two_roots(self):
+        self.assertEqual(solve_quadratic(1, -3, 2), (2.0, 1.0))
 
-def test_two_distinct_roots():
-    assert solve_quadratic_equation(1, -5, 6) == [2.0, 3.0]
+    def test_one_root(self):
+        self.assertEqual(solve_quadratic(1, 2, 1), (-1.0, -1.0))
 
-def test_two_equal_roots():
-    assert solve_quadratic_equation(1, -4, 4) == [2.0]
+    def test_no_real_roots(self):
+        self.assertEqual(solve_quadratic(1, 0, 1), "No real roots")
 
-def test_two_equal_roots_b_zero():
-    assert solve_quadratic_equation(1, 0, -9) == [-3.0, 3.0]
+    def test_not_quadratic(self):
+        self.assertEqual(solve_quadratic(0, 2, 1), "Not a quadratic equation")
 
-def test_two_equal_roots_a_zero_b_zero():
-    assert solve_quadratic_equation(4, 0, 0) == [0.0]
+    def test_zero_root(self):
+        self.assertEqual(solve_quadratic(1, 1, 0), (0.0, -1.0))
 
-def test_no_real_roots():
-    result = solve_quadratic_equation(1, 1, 1)
-    assert len(result) == 2
-    assert isinstance(result[0], complex)
-    assert isinstance(result[1], complex)
+if __name__ == "__main__":
+    unittest.main()
 
-def test_a_zero_not_quadratic():
-    result = solve_quadratic_equation(0, 5, -2)
-    assert result == [0]
-
-def test_a_zero_b_zero_c_not_zero():
-  assert solve_quadratic_equation(0, 0, 2) == []
-
-def test_a_zero_b_zero_c_zero():
-    assert solve_quadratic_equation(0, 0, 0) is None
-
-def test_large_coefficients():
-    assert solve_quadratic_equation(1000, -2000, 1000) == [1.0]
-
-def test_small_coefficients():
-  roots = solve_quadratic_equation(0.001, -0.002, 0.001)
-  assert len(roots) == 1
-  assert abs(roots[0] - 1.0) < 1e-6
-
-
-def test_invalid_input_string():
-    assert solve_quadratic_equation("a", 2, 3) is None
-
-def test_invalid_input_none():
-    assert solve_quadratic_equation(1, None, 3) is None
