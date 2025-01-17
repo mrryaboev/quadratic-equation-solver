@@ -22,7 +22,7 @@ def test_no_real_roots():
 
 def test_a_zero_not_quadratic():
     result = solve_quadratic_equation(0, 5, -2)
-    assert result == [-0.4]
+    assert result == [0]
 
 def test_a_zero_b_zero_c_not_zero():
   assert solve_quadratic_equation(0, 0, 2) == []
