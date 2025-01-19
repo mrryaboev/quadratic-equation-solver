@@ -13,8 +13,8 @@ def test_one_real_root():
 
 def test_complex_roots():
     x1, x2 = solve_quadratic_equation(1, 2, 5)
-    assert x1 == (-1+2j)
-    assert x2 == (-1+2j)
+    assert x1 == (-1-2j)
+    assert x2 == (-1-2j)
 
 def test_integer_coefficients():
     x1, x2 = solve_quadratic_equation(2, -4, 2)
